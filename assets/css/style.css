@@ -24,6 +24,9 @@ h1 {
 h2 {
 	font-size: 2rem;
 }
+h3 {
+	font-size: 1.5rem;
+}
 .img-fluid {
   max-width: 100%;
   height: auto;
@@ -168,8 +171,35 @@ h2 {
           flex: 0 0 100%;
   max-width: 100%;
 }
+.box {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 0.25rem;
+}
+.box-img-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1.25rem;
+}
+.box-title {
+  margin-bottom: 0.75rem;
+}
 .text-center {
 	text-align: center;
+}
+.white {
+	color: whitesmoke;
 }
 /* Small Devices */
 @media (min-width: 576px) {
