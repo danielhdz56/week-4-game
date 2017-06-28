@@ -1,33 +1,78 @@
-var player1 = {
-	
-}
-
-
-
-
-
-$('.player').hover(
+//Global Variables
+var myPlayer;
+var myOpponent;
+var pickedPlayer = false;
+var pickedOpponent = false;
+//this is an array with four objects
+var characters = [ {
+	id: 0,
+	name: "Obi-Wan Kenobi",
+	life: 100,
+	attack: 10,
+	computerAttack: 25
+}, {
+	id: 1,
+	name: "Boba Fett",
+	life: 100,
+	attack: 10,
+	computerAttack: 25
+}, {
+	id: 2,
+	name: "Anakin Skywalker",
+	life: 100,
+	attack: 10,
+	computerAttack: 25
+}, {
+	id: 3,
+	name: "R2D2",
+	life: 100,
+	attack: 10,
+	computerAttack: 25
+}];
+$('.characters').hover(
 	function() {
 		$(this).find('.destroy').show();
 	}, function() {
 		$(this).find('.destroy').hide();
 	}
 );
-//$('.player').one('click', function() {
-// Won't work as expected because this is a static event handler
-//This means that it installs an event handler on any objects that match the .player selector AT THAT MOMENT IN TIME.
-//Those event handlers are then in place FOREVER. They no longer look at what classes any elements have. 
-//This means that changing a class after you install a static event handler does not affect which elements have event handlers on them BECAUSE THEY HAVE ALREADY BEEN ADDED.
-$(document).one('click', '.player', function() {
-	console.log('You clicked a player');
-	$(this).siblings().addClass('enemy');
-	$('.player').toggleClass('m-0a');	
-	$(this).siblings().appendTo('#enemyBoard');
-	$('#enemies').show();
-	$('.enemy').click(function() {
-		console.log("you clicked a enemy");
-		$('#attack').show();
+function characterSettingClick() {
+	$(document).on('click', '.characters', function(){
+		if(!pickedPlayer) {
+			myPlayer = $(this).attr('id');
+			$(this).siblings().addClass('enemy');
+			$('.characters').toggleClass('m-0a');	
+			$(this).siblings().appendTo('#enemyBoard');
+			$('#enemies').show();
+			$(this).removeClass('characters');
+			pickedPlayer = true;
+			console.log("myPlayer has the following id: " + myPlayer);
+			myPlayer = characters[myPlayer];
+			console.log(myPlayer);
+		}
+		else if(pickedPlayer && !pickedOpponent) {
+			myOpponent = $(this).attr('id');
+			$(this).siblings().addClass('benched');
+		  	$(this).siblings().appendTo('#benchedBoard');
+		 	$('#attack').show();
+		 	$('#bench').show();
+			pickedOpponent = true;
+			console.log("myOpponent has the following id: " + myOpponent);
+			myOpponent = characters[myOpponent];
+			console.log(myOpponent);
+		}
 	});
-});
+}
+characterSettingClick();
+
+function combatAttackClick() {
+	$('#attack').click(function() {
+		console.log("You clicked on the attack button");
+	});
+}
+combatAttackClick();
+
+
+
 
 

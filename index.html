@@ -18,7 +18,7 @@
 			<div class="col-12">
 				<h2 class="text-center">CHOOSE A CHARACTER</h2>
 				<div class="row bg-black white">
-					<div class="player col-3">
+					<div id="0" class="characters col-3">
 						<div class="box">
 							<img class="img-fluid" src="assets/images/bkPlayer.svg" alt="Ben Kenobi">
 							<div class="box-img-overlay">
@@ -27,7 +27,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="player col-3">
+					<div id="1" class="characters col-3">
 						<div class="box">
 							<img class="img-fluid" src="assets/images/bPlayer.svg" alt="Boba">
 							<div class="box-img-overlay">
@@ -36,7 +36,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="player col-3">
+					<div id="2" class="characters col-3">
 						<div class="box">
 							<img class="img-fluid" src="assets/images/dvPlayer.svg" alt="Darth Vader">
 							<div class="box-img-overlay">
@@ -45,7 +45,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="player col-3">
+					<div id="3" class="characters col-3">
 						<div class="box">
 							<img class="img-fluid" src="assets/images/rPlayer.svg" alt="R2D2">
 							<div class="box-img-overlay">
@@ -62,6 +62,10 @@
 			</div>
 			<div id="attack" class="col-12 destroy">
 				<button>ATTACK</button>
+			</div>
+			<div id="bench" class="col-12 destroy">
+				<h2 class="text-center">BENCHED OPPONENTS</h2>
+				<div id="benchedBoard" class="row bg-black white"></div>
 			</div>
 		</div>
 	</div>
