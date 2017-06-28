@@ -68,11 +68,20 @@ characterSettingClick();
 function combatAttackClick() {
 	$('#attack').click(function() {
 		console.log("You clicked on the attack button");
+		myOpponent.life = (myOpponent.life - myPlayer.attack);
+		console.log("My Opponents Life: " + myOpponent.life);
+		console.log(myPlayer.attack);
+		if(myOpponent.life <= 0) {
+			console.log("opponent has died")
+		}
+		myPlayer.life = (myPlayer.life - myOpponent.computerAttack);
+		console.log("This should be equal to 75: " + myPlayer.life);
 	});
 }
+
 combatAttackClick();
+console.log(characters[0].attack);
 
-
-
+for (i=0)
 
 
