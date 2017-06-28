@@ -3,6 +3,7 @@ var myPlayer;
 var myOpponent;
 var pickedPlayer = false;
 var pickedOpponent = false;
+var i = 1;
 //this is an array with four objects
 var characters = [ {
 	id: 0,
@@ -59,7 +60,7 @@ function characterSettingClick() {
 			pickedOpponent = true;
 			console.log("myOpponent has the following id: " + myOpponent);
 			myOpponent = characters[myOpponent];
-			console.log(myOpponent);
+			console.log(myOpponent.life);
 		}
 	});
 }
@@ -67,21 +68,16 @@ characterSettingClick();
 
 function combatAttackClick() {
 	$('#attack').click(function() {
-		console.log("You clicked on the attack button");
-		myOpponent.life = (myOpponent.life - myPlayer.attack);
-		console.log("My Opponents Life: " + myOpponent.life);
-		console.log(myPlayer.attack);
-		if(myOpponent.life <= 0) {
-			console.log("opponent has died")
+		//Player attacking opponent it is important that the variable i is defined at the Global Scope or else it will always reset on click
+		myOpponent.life = myOpponent.life - (myPlayer.attack * i);
+		i++;
+		$('#' + myOpponent.id).find("p").html("Life: " + myOpponent.life);
+		if( myOpponent.life <= 0) {
+			$('#' + myOpponent.id).remove();
 		}
-		myPlayer.life = (myPlayer.life - myOpponent.computerAttack);
-		console.log("This should be equal to 75: " + myPlayer.life);
+		//Opponent attacking player
+		myPlayer.life = myPlayer.life - myOpponent.computerAttack;
+		$('#' + myPlayer.id).find("p").html("Life: " + myPlayer.life);
 	});
 }
-
 combatAttackClick();
-console.log(characters[0].attack);
-
-for (i=0)
-
-
