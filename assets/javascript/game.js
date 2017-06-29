@@ -95,24 +95,31 @@ function characterSettingClick() {
 			$('#attack').show();
 			myOpponent = $(this).attr('id');
 			$('#chooseTextOpponent').text(characters[myOpponent].name)
-			$(this).nextAll().addBack().removeClass('characters');
+			$(this).siblings().addClass('benchedEnemies');
+			$(this).siblings().addBack().removeClass('characters');
 			$(this).siblings().appendTo($('#benched'));
 		}
 	})
 }
 characterSettingClick();
-// function combatAttackClick() {
-// 	$('#attack').click(function() {
-// 		//Player attacking opponent it is important that the variable i is defined at the Global Scope or else it will always reset on click
-// 		myOpponent.life = myOpponent.life - (myPlayer.attack * i);
-// 		i++;
-// 		$('#' + myOpponent.id).find("p").html("Life: " + myOpponent.life);
-// 		if( myOpponent.life <= 0) {
-// 			$('#' + myOpponent.id).remove();
-// 		}
-// 		//Opponent attacking player
-// 		myPlayer.life = myPlayer.life - myOpponent.computerAttack;
-// 		$('#' + myPlayer.id).find("p").html("Life: " + myPlayer.life);
-// 	});
-// }
-// combatAttackClick();
+//Combat
+function combatAttackClick() {
+	$('#attack').click(function() {
+		//Player attacking opponent it is important that the variable i is defined at the Global Scope or else it will always reset on click
+		characters[myOpponent].life = characters[myOpponent].life - (characters[myPlayer].attack);
+		i++;
+		$('#' + myOpponent).find('p').text('Life: ' + characters[myOpponent].life)
+		if(characters[myOpponent].life <= 0) {
+			$('#' + myOpponent).remove();
+			$('#chooseTextOpponent').text("Choose Another Opponent");
+			$('.benchedEnemies').addClass('characters');
+			$('.benchedEnemies').appendTo($('#enemies'));
+			$('#benchedBoard').hide();
+			$('#attack').hide();
+		}
+		//Opponent attacking player
+		myPlayer.life = myPlayer.life - myOpponent.computerAttack;
+		$('#' + myPlayer.id).find("p").html("Life: " + myPlayer.life);
+	});
+}
+combatAttackClick();
