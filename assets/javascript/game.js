@@ -8,28 +8,38 @@ var i = 1;
 var characters = [ {
 	id: 0,
 	name: "Obi-Wan Kenobi",
+	img: "assets/images/bkPlayer.svg",
 	life: 100,
 	attack: 10,
 	computerAttack: 25
 }, {
 	id: 1,
 	name: "Boba Fett",
+	img: "assets/images/bPlayer.svg",
 	life: 100,
 	attack: 10,
 	computerAttack: 25
 }, {
 	id: 2,
 	name: "Anakin Skywalker",
+	img: "../assets/images/dvPlayer.svg",
 	life: 100,
 	attack: 10,
 	computerAttack: 25
 }, {
 	id: 3,
 	name: "R2D2",
+	img: "..assets/images/rPlayer.svg",
 	life: 100,
 	attack: 10,
 	computerAttack: 25
 }];
+//Creating the characthers
+
+
+
+
+
 $('.characters').hover(
 	function() {
 		$(this).find('.destroy').show();
