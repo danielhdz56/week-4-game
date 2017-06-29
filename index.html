@@ -8,7 +8,7 @@
 	<link type="text/css" rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-	<div class="container">
+	<div id="container" class="container">
 		<div class="row">
 			<div class="col-12">
 					<h1 class="text-center">STAR WARS RPG</h1>
@@ -16,58 +16,21 @@
 		</div>
 		<div class="row">
 			<div class="col-12">
-				<h2 class="text-center">CHOOSE A CHARACTER</h2>
-				<div class="row bg-black white">
-					<div id="0" class="characters col-3">
-						<div class="box">
-							<img class="img-fluid" src="assets/images/bkPlayer.svg" alt="Ben Kenobi">
-							<div class="box-img-overlay">
-								<h3 class="box-title destroy">Obi-Wan Kenobi</h3>
-								<p class="destroy">Life: 100</p>
-							</div>
-						</div>
-					</div>
-					<div id="1" class="characters col-3">
-						<div class="box">
-							<img class="img-fluid" src="assets/images/bPlayer.svg" alt="Boba">
-							<div class="box-img-overlay">
-								<h3 class="box-title destroy">Boba Fett</h3>
-								<p class="destroy">Life: 100</p>
-							</div>
-						</div>
-					</div>
-					<div id="2" class="characters col-3">
-						<div class="box">
-							<img class="img-fluid" src="assets/images/dvPlayer.svg" alt="Darth Vader">
-							<div class="box-img-overlay">
-								<h3 class="box-title destroy">Anakin Skywalker</h3>
-								<p class="destroy">Life: 100</p>
-							</div>
-						</div>
-					</div>
-					<div id="3" class="characters col-3">
-						<div class="box">
-							<img class="img-fluid" src="assets/images/rPlayer.svg" alt="R2D2">
-							<div class="box-img-overlay">
-								<h3 class="box-title destroy">R2D2</h3>
-								<p class="destroy">Life: 100</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				<h2 id="chooseTextCharacter" class="text-center">CHOOSE A CHARACTER</h2>
+				<div id="characters" class="row bg-black white"></div>
 			</div>
-			<div id="enemies" class="col-12 destroy">
-				<h2 class="text-center">CHOOSE AN OPPONENT</h2>
-				<div id="enemyBoard" class="row bg-black white"></div>
+			<div id="enemyBoard" class="col-12">
+				<h2 id="chooseTextOpponent" class="text-center">CHOOSE AN OPPONENT</h2>
+				<div id="enemies" class="row bg-black white"></div>
 			</div>
-			<div id="attack" class="col-12 destroy">
+			<div id="attack" class="col-12">
 				<button>ATTACK</button>
 			</div>
-			<div id="bench" class="col-12 destroy">
-				<h2 class="text-center">BENCHED OPPONENTS</h2>
-				<div id="benchedBoard" class="row bg-black white"></div>
+			<div id="benchedBoard" class="col-12">
+				<h2 class="text-center">BENCHED</h2>
+				<div id="benched" class="row bg-black white"></div>
 			</div>
-		</div>
+		</div> 
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/javascript/game.js"></script>

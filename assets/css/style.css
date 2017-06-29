@@ -95,6 +95,7 @@ h3 {
       -ms-flex: 0 0 25%;
           flex: 0 0 25%;
   max-width: 25%;
+  margin: 0 auto;
 }
 
 .col-4 {
@@ -221,11 +222,8 @@ button {
   	display: block;
   	width: 100%;
 }
-.destroy {
+#enemyBoard, #benchedBoard, #attack {
 	display: none;
-}
-.m-0a {
-	margin: 0 auto;
 }
 
 
