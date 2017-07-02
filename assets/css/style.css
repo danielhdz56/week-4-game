@@ -165,6 +165,9 @@ h3 {
           flex: 0 0 100%;
   max-width: 100%;
 }
+.offset-3 {
+  margin-left: 25%;
+}
 @media (min-width: 576px) {
   h1 {
     font-size: 2.5rem;
@@ -277,6 +280,9 @@ h3 {
             flex: 0 0 100%;
     max-width: 100%;
   }
+  .offset-sm-3 {
+    margin-left: 25%;
+  }
 }
 .box {
   position: relative;
@@ -332,8 +338,14 @@ button {
   	display: block;
   	width: 100%;
 }
-#enemyBoard, #benchedBoard, #attack {
+#attack, #reset {
 	display: none;
+}
+.fireball {
+  position: absolute;
+  bottom: 5px;
+  left: 15px;
+  z-index: 1;
 }
 
 
