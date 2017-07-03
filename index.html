@@ -3,33 +3,42 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Star Wars RPG Game V1</title>
+	<title>POKEMON RPG</title>
 	<link type="text/css" rel="stylesheet" href="assets/css/reset.css">
 	<link type="text/css" rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+	<canvas id="canvas-radial"></canvas>
 	<div id="container" class="container">
 		<div class="row">
 			<div class="col-12">
-				<h1 class="text-center">STAR WARS RPG</h1>
+				<img class="d-block mx-auto" src="assets/images/pokemon.png" alt="logo" width="50%">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<img class="float-left" src="assets/images/player.svg" alt="logo" width="50%">
+			</div>
+			<div class="col-6">
+				<img class="float-right" src="assets/images/player2.svg" alt="logo" width="50%">
 			</div>
 		</div>
 		<div class="row">
 			<div id="characterBoard" class="col-6">
 			</div>
 			<div id="enemyBoard" class="col-6">
-				
 			</div>
 			<div id="attack" class="col-12">
-				<button>ATTACK</button>
+				<img id="battle" class="d-block mx-auto" src="assets/images/battle.svg" alt="battle button" width="25%">
 			</div>
 			<div id="reset" class="col-12">
-				<button>RESET</button>
+				<img id="revive" class="d-block mx-auto" src="assets/images/revive.svg" alt="battle button" width="25%">
 			</div>
 			<div id="benchedBoard" class="col-6 offset-3">
 			</div>
 		</div> 
 	</div>
+	<script type="text/javascript" src="assets/javascript/granim.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>

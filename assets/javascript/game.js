@@ -1,3 +1,26 @@
+//Gradient Background
+var graminInstance = new Granim( {
+	element: '#canvas-radial',
+	name: 'radial-gradient', 
+	direction: 'radial',
+	opacity: [1, 1],
+	isPausedWhenNotInView: true,
+	states: {
+		"default-state": {
+			gradients: [
+				['#000046', '#1CB5E0'],
+				['#1CB5E0', '#000046'],
+			]
+		}
+	}
+});
+//Theme Song
+myAudio = new Audio('assets/audio/101-opening.mp3'); 
+myAudio.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
+myAudio.play();
 //Global Variables
 //Although the variables aren't declared to a specific value, this allows us to update any changes made inside blocks of code at the Global level. 
 var myPlayer;
@@ -13,8 +36,8 @@ function startGame() {
 	$('#benchedBoard').empty();
 	characters = [ {
 		id: 0,
-		name: "Obi-Wan",
-		img: "assets/images/bkPlayer.svg",
+		name: "Meowth",
+		img: "assets/images/meowth.svg",
 		hp: 100,
 		attack: 15,
 		computerAttack: 7,
@@ -22,22 +45,22 @@ function startGame() {
 		animationName: "fireball"
 	}, {
 		id: 1,
-		name: "Boba Fett",
-		img: "assets/images/bPlayer.svg",
+		name: "Pikachu",
+		img: "assets/images/pikachu.svg",
 		hp: 120,
 		attack: 8,
 		computerAttack: 15
 	}, {
 		id: 2,
-		name: "Anakin Skywalker",
-		img: "assets/images/dvPlayer.svg",
+		name: "Snorlax",
+		img: "assets/images/snorlax.svg",
 		hp: 165,
 		attack: 4,
 		computerAttack: 20
 	}, {
 		id: 3,
-		name: "R2D2",
-		img: "assets/images/rPlayer.svg",
+		name: "Dratini",
+		img: "assets/images/dratini.svg",
 		hp: 180,
 		attack: 3,
 		computerAttack: 25
@@ -51,7 +74,7 @@ function startGame() {
 	var hpTextCharacter = $('<h2>');
 	chooseTextCharacter.attr('id', "chooseTextCharacter");
 	chooseTextCharacter.addClass('text-center');
-	chooseTextCharacter.text("CHOOSE A CHARACTER")
+	chooseTextCharacter.text("CHOOSE A POKEMON")
 	chooseTextCharacter.appendTo('#characterBoard');
 	character.attr('id', "characters");
 	character.addClass('row');
@@ -150,7 +173,7 @@ function characterSettingClick() {
 characterSettingClick();
 //Combat
 function combatAttackClick() {
-	$('#attack').click(function() {
+	$('#battle').click(function() {
 		//Player attacking opponent it is important that the variable i is defined at the Global Scope or else it will always reset on click
 		characters[myOpponent].hp = characters[myOpponent].hp - attackMultiplier * characters[myPlayer].attack;
 		$('#hpTextOpponent').text("HP: " + characters[myOpponent].hp);
@@ -200,7 +223,7 @@ function combatAttackClick() {
 }
 combatAttackClick();
 function resetGame() {
-	$('#reset').click(function() {
+	$('#revive').click(function() {
 		startGame();
 		$('#reset').hide();
 	});
