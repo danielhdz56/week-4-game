@@ -34,6 +34,10 @@ var players;
 var pokemons;
 //Creating the pokemons
 function startGame() {
+	$('#navLeft').remove();
+	$('#navRight').remove();
+	$('#navbars-and-content').prepend($('#content').children());
+	$('#content').remove();
 	$('#playerBoard').empty();
 	$('#pokemonBoard').empty();
 	$('#enemyBoard').empty();
@@ -75,7 +79,23 @@ function startGame() {
 		hp: 100,
 		attack: 15,
 		computerAttack: 7,
-		pokeball: "assets/images/pokeball.svg"
+		pokeball: "assets/images/pokeball.svg",
+		type: "Normal",
+		abilities: "Unnerve",
+		genderRatio: "50% male, 50% female",
+		catchRate: "33.3%",
+		pokedexNumber: "#052",
+		EVYield: {
+			hp: 0,
+			atk: 0,
+			def: 0,
+			sAtk: 0,
+			sDef: 0,
+			speed: 1
+		},
+		height: "0.4 meters",
+		weight: "9.3 lbs.",
+		pokedexEntry: "Meowth, the Scratch Cat Pokémon. Meowth loves to roam at night to gather coins and other objects that sparkle, but it spend most of the daylight hours sleeping."
 	}, {
 		id: 1,
 		name: "Pikachu",
@@ -83,7 +103,23 @@ function startGame() {
 		hp: 120,
 		attack: 8,
 		computerAttack: 15,
-		pokeball: "assets/images/superball.svg"
+		pokeball: "assets/images/superball.svg",
+		type: "Electric",
+		abilities: "Static",
+		genderRatio: "50% male, 50% female",
+		catchRate: "24.8%",
+		pokedexNumber: "#025",
+		EVYield: {
+			hp: 0,
+			atk: 0,
+			def: 0,
+			sAtk: 0,
+			sDef: 0,
+			speed: 2
+		},
+		height: "0.4 meters",
+		weight: "13.2 lbs.",
+		pokedexEntry: "Pikachu, the Mouse Pokémon. It can generate electric attacks from the electric pouches located in both of its cheeks."
 	}, {
 		id: 2,
 		name: "Snorlax",
@@ -91,7 +127,23 @@ function startGame() {
 		hp: 165,
 		attack: 4,
 		computerAttack: 20,
-		pokeball: "assets/images/ultra-ball.svg"
+		pokeball: "assets/images/ultra-ball.svg",
+		type: "Normal",
+		abilities: "Immunity",
+		genderRatio: "87.5% male, 12.5% female",
+		catchRate: "3.3%",
+		pokedexNumber: "#143",
+		EVYield: {
+			hp: 2,
+			atk: 0,
+			def: 0,
+			sAtk: 0,
+			sDef: 0,
+			speed: 0
+		},
+		height: "2.1 meters",
+		weight: "1014.1 lbs.",
+		pokedexEntry: "Snorlax, the Sleeping Pokémon. Snorlax isn't satisfied unless it eats at least 900 pounds of food per day. Once it is full, it promptly goes to sleep."
 	}, {
 		id: 3,
 		name: "Dratini",
@@ -99,7 +151,23 @@ function startGame() {
 		hp: 180,
 		attack: 3,
 		computerAttack: 25,
-		pokeball: "assets/images/mega-ball.svg"
+		pokeball: "assets/images/mega-ball.svg",
+		type: "Dragon",
+		abilities: "Shed Skin",
+		genderRatio: "50% male, 50% female",
+		catchRate: "5.9%",
+		pokedexNumber: "#147",
+		EVYield: {
+			hp: 0,
+			atk: 1,
+			def: 0,
+			sAtk: 0,
+			sDef: 0,
+			speed: 0
+		},
+		height: "1.8 meters",
+		weight: "7.3 lbs.",
+		pokedexEntry: "Dratini, the Dragon Pokémon. Dratini sheds its skin as it grows, often doing so while hidden behind large powerful waterfalls."
 	}];
 	attackMultiplier = 1;
 	pickedPokemon = false;
@@ -163,7 +231,7 @@ function playerSettingClick() {
 				img.attr('alt', teams[j].name);
 				img.attr('width', '50%');
 				img.appendTo(teamChoices);
-				boxBlock.addClass('box-block');
+				boxBlock.addClass('box-block team-block');
 				boxBlock.appendTo(teamChoices);
 				boxText.addClass('box-text');
 				boxText.text('Team: ' + teams[j].name);
@@ -175,9 +243,9 @@ function playerSettingClick() {
 			}
 			$('.team').hover(
 				function() {
-					$(this).parent().find('.box-block').show();
+					$(this).parent().find('.team-block').show();
 				}, function() {
-					$(this).parent().find('.box-block').hide();
+					$(this).parent().find('.team-block').hide();
 				}
 			);	
 		}
@@ -189,7 +257,7 @@ function teamSettingClick() {
 	$(document).on('click', '.team', function() {
 		if(!pickedTeam) {
 			$('.team').removeClass('team');
-			$('.box-block').remove();
+			$('.team-block').remove();
 			chooseTextTeam.remove();
 			var navLeft = $('<div>');
 			var content = $('<div>');
@@ -238,9 +306,6 @@ function teamSettingClick() {
 			var pokemonChoices = $('<div>');
 			var box = $('<div>');
 			var img1 = $('<img>');
-			var overlay = $('<div>');
-			var name = $('<h3>');
-			var hp = $('<h3>');
 			pokemonChoices.attr('id', k);
 			pokemonChoices.addClass('col-3 pokemons');
 			pokemonChoices.appendTo('#pokemons');
@@ -251,23 +316,15 @@ function teamSettingClick() {
 			img1.attr('src', pokemons[k].pokeball);
 			img1.attr('alt', pokemons[k].name);
 			img1.appendTo(box);
-			overlay.addClass('box-img-overlay');
-			overlay.hide();
-			overlay.appendTo(box);
-			name.addClass('box-title');
-			name.text(pokemons[k].name);
-			name.appendTo(overlay);
-			hp.text('HP: ' + pokemons[k].hp);
-			hp.appendTo(overlay)	
 		}
 		//This goes inside the start game function because if it didn't it would not apply the hover event when the game is reset.
 		$('.pokemons').hover(
 			function() {
 				$(this).find('.img-fluid').attr('src', pokemons[$(this).attr('id')].img);
-				$(this).find('.box-img-overlay').show();
+				$('.pokemon-block').show();
 			}, function() {
-				$(this).find('.box-img-overlay').hide();
 				$(this).find('.img-fluid').attr('src', pokemons[$(this).attr('id')].pokeball);
+				$('.pokemon-block').hide();
 			}
 		);	
 	});
@@ -277,7 +334,8 @@ teamSettingClick();
 //PokemonSettingClick
 function pokemonSettingClick() {
 	$(document).on('click', '.pokemons', function() {
-	$(this).unbind("mouseleave");		
+	$(this).unbind("mouseleave");	
+	$(this).unbind("mouseenter");		
 	//Will only run if I haven't picked a Pokemon
 		if(!pickedPokemon) {
 			var chooseTextOpponent = $('<h2>');
