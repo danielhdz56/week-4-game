@@ -24,6 +24,7 @@ myAudio.play();
 //Global Variables
 //Although the variables aren't declared to a specific value, this allows us to update any changes made inside blocks of code at the Global level. 
 var pickedPlayer;
+var pickedTeam;
 var myPokemon;
 var myOpponent;
 var pickedPokemon;
@@ -44,6 +45,28 @@ function startGame() {
 		gender: "female",
 		img: "assets/images/player2.svg"
 	
+	}];
+	teams = [ {
+		name: "Valor",
+		values: "Team Valor's values rely on strength. They believe that Pokémon have great strength, and they are interested in ways to increase those strengths for battle.",
+		leader: "Candela",
+		message: "There is no doubt that the Pokemon in our team have trained are the strongest in battle!",
+		sigil: "assets/images/valor.svg",
+		pokemon: "assets/images/moltres.svg"
+	}, {
+		name: "Mystic",
+		values: "Team Mystic's values rely on trusting in wisdom. They believe that Pokémon have great wisdom, and they are interested in learning more about how they evolve.",
+		leader: "Blanche",
+		message: "With our calm analysis of every situation, we can't lose!",
+		sigil: "assets/images/mystic.svg",
+		pokemon: "assets/images/articuno.svg"
+	}, {
+		name: "Instinct",
+		values: "Team Instinct's values rely on trusting intuition. They believe that Pokémon have great intuition, and they are interested in learning more about the significance of their hatching.",
+		leader: "Spark",
+		message: "You never lose when you trust your instincts!",
+		sigil: "assets/images/instinct.svg",
+		pokemon: "assets/images/zapdos.svg"
 	}];
 	pokemons = [ {
 		id: 0,
@@ -82,6 +105,7 @@ function startGame() {
 	pickedPokemon = false;
 	pickedOpponent = false;
 	pickedPlayer = false;
+	pickedTeam = false;
 	var chooseTextPlayer = $('<h2>');
 	var player = $('<div>');
 	chooseTextPlayer.attr('id', "chooseTextPlayer");
@@ -114,61 +138,142 @@ function playerSettingClick() {
 			//This checks whether you picked a female. If you did then it will insert it before the male characther
 			if($(this).parent('#female').length){
 				$(this).insertBefore('#male');
-			} 
-			//This sets up the pokemon screen
-			var chooseTextPokemon = $('<h2>');
-			var pokemon = $('<div>');
-			var hpTextPokemon = $('<h2>');
-			chooseTextPokemon.attr('id', "chooseTextPokemon");
-			chooseTextPokemon.addClass('text-center');
-			chooseTextPokemon.text("CHOOSE A POKEMON")
-			chooseTextPokemon.appendTo('#pokemonBoard');
-			pokemon.attr('id', "pokemons");
-			pokemon.addClass('row');
-			pokemon.appendTo('#pokemonBoard');
-			hpTextPokemon.attr('id', "hpTextPokemon");
-			hpTextPokemon.addClass('text-center');
-			hpTextPokemon.appendTo('#pokemonBoard');
-			for(j = 0; j < pokemons.length; j++) {
-				var pokemonChoices = $('<div>');
-				var box = $('<div>');
-				var img1 = $('<img>');
-				var overlay = $('<div>');
-				var name = $('<h3>');
-				var hp = $('<h3>');
-				pokemonChoices.attr('id', j);
-				pokemonChoices.addClass('col-3 pokemons');
-				pokemonChoices.appendTo('#pokemons');
-				box.addClass('box');
-				box.appendTo(pokemonChoices);
-				img1.addClass('img-fluid');
-				//can you put more attributes in one line?
-				img1.attr('src', pokemons[j].pokeball);
-				img1.attr('alt', pokemons[j].name);
-				img1.appendTo(box);
-				overlay.addClass('box-img-overlay');
-				overlay.hide();
-				overlay.appendTo(box);
-				name.addClass('box-title');
-				name.text(pokemons[i].name);
-				name.appendTo(overlay);
-				hp.text('HP: ' + pokemons[j].hp);
-				hp.appendTo(overlay)	
 			}
-			//This goes inside the start game function because if it didn't it would not apply the hover event when the game is reset.
-			$('.pokemons').hover(
+			//This hides the players while the user is choosing a team 
+			$('#playerBoard').hide();
+			//This sets up the team screen 
+			var chooseTextTeam = $('<h2>');
+			var team = $('<div>');
+			chooseTextTeam.attr('id', "chooseTextTeam");
+			chooseTextTeam.addClass('text-center');
+			chooseTextTeam.text("CHOOSE A TEAM");
+			chooseTextTeam.appendTo('#teamBoard');
+			team.addClass('row');
+			team.appendTo('#teamBoard');
+			for (j=0; j < teams.length; j++) {
+				var teamChoices = $('<div>');
+				var img = $('<img>');
+				var boxBlock = $('<div>');
+				var boxText = $('<p>');
+				teamChoices.attr('id', teams[j].name);
+				teamChoices.addClass('box col-4');
+				teamChoices.appendTo(team);
+				img.addClass('box-img-top team d-block mx-auto');
+				img.attr('src', teams[j].sigil);
+				img.attr('alt', teams[j].name);
+				img.attr('width', '50%');
+				img.appendTo(teamChoices);
+				boxBlock.addClass('box-block');
+				boxBlock.appendTo(teamChoices);
+				boxText.addClass('box-text');
+				boxText.text('Team: ' + teams[j].name);
+				boxText.append('<br>');
+				boxText.append('Team Leader: ' + teams[j].leader);
+				boxText.append('<br>');
+				boxText.append(teams[j].message);
+				boxText.appendTo(boxBlock);
+			}
+			$('.team').hover(
 				function() {
-					$(this).find('.img-fluid').attr('src', pokemons[$(this).attr('id')].img);
-					$(this).find('.box-img-overlay').show();
+					$(this).parent().find('.box-block').show();
 				}, function() {
-					$(this).find('.box-img-overlay').hide();
-					$(this).find('.img-fluid').attr('src', pokemons[$(this).attr('id')].pokeball);
+					$(this).parent().find('.box-block').hide();
 				}
 			);	
 		}
 	});
 }
 playerSettingClick();
+//Team Setting Click
+function teamSettingClick() {
+	$(document).on('click', '.team', function() {
+		if(!pickedTeam) {
+			$('.team').removeClass('team');
+			$('.box-block').remove();
+			chooseTextTeam.remove();
+			var navLeft = $('<div>');
+			var content = $('<div>');
+			var navRight = $('<div>');
+			navLeft.addClass('col-1');
+			navLeft.attr('id', 'navLeft');
+			content.addClass('col-10');
+			content.attr('id', 'content');
+			navRight.addClass('col-1');
+			navRight.attr('id', 'navRight');
+			$('#navbars-and-content').prepend(content);
+			//this makes sure that all of the siblings are moved into the col-10
+			content.prepend(content.siblings());
+			$('#navbars-and-content').prepend(navLeft);
+			$('#navbars-and-content').append(navRight);
+			$('#playerBoard').show();
+			//This makes sure that one of the other teams gets randomly selected to be the team of the computer
+			var opponentTeam = $(this).parent().siblings();
+			opponentTeam = $(opponentTeam[Math.round(Math.random())]);
+			opponentTeam.removeClass('col-4');
+			opponentTeam.find('.d-block').attr('width', '100%');
+			opponentTeam.appendTo(navRight);
+			//This makes sure that the team that I picked gets moved to the navbar on the left and the proper classes are removed
+			$(this).parent().removeClass('col-4');
+			$(this).attr('width', '100%');
+			$(this).parent().appendTo(navLeft);
+			//This empties out the left over team
+			$('#teamBoard').empty();
+		}
+		
+		//This sets up the pokemon screen
+		var chooseTextPokemon = $('<h2>');
+		var pokemon = $('<div>');
+		var hpTextPokemon = $('<h2>');
+		chooseTextPokemon.attr('id', "chooseTextPokemon");
+		chooseTextPokemon.addClass('text-center');
+		chooseTextPokemon.text("CHOOSE A POKEMON")
+		chooseTextPokemon.appendTo('#pokemonBoard');
+		pokemon.attr('id', "pokemons");
+		pokemon.addClass('row');
+		pokemon.appendTo('#pokemonBoard');
+		hpTextPokemon.attr('id', "hpTextPokemon");
+		hpTextPokemon.addClass('text-center');
+		hpTextPokemon.appendTo('#pokemonBoard');
+		for(k = 0; k < pokemons.length; k++) {
+			var pokemonChoices = $('<div>');
+			var box = $('<div>');
+			var img1 = $('<img>');
+			var overlay = $('<div>');
+			var name = $('<h3>');
+			var hp = $('<h3>');
+			pokemonChoices.attr('id', k);
+			pokemonChoices.addClass('col-3 pokemons');
+			pokemonChoices.appendTo('#pokemons');
+			box.addClass('box');
+			box.appendTo(pokemonChoices);
+			img1.addClass('img-fluid');
+			//can you put more attributes in one line?
+			img1.attr('src', pokemons[k].pokeball);
+			img1.attr('alt', pokemons[k].name);
+			img1.appendTo(box);
+			overlay.addClass('box-img-overlay');
+			overlay.hide();
+			overlay.appendTo(box);
+			name.addClass('box-title');
+			name.text(pokemons[k].name);
+			name.appendTo(overlay);
+			hp.text('HP: ' + pokemons[k].hp);
+			hp.appendTo(overlay)	
+		}
+		//This goes inside the start game function because if it didn't it would not apply the hover event when the game is reset.
+		$('.pokemons').hover(
+			function() {
+				$(this).find('.img-fluid').attr('src', pokemons[$(this).attr('id')].img);
+				$(this).find('.box-img-overlay').show();
+			}, function() {
+				$(this).find('.box-img-overlay').hide();
+				$(this).find('.img-fluid').attr('src', pokemons[$(this).attr('id')].pokeball);
+			}
+		);	
+	});
+}
+
+teamSettingClick();
 //PokemonSettingClick
 function pokemonSettingClick() {
 	$(document).on('click', '.pokemons', function() {
