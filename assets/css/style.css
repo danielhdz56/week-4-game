@@ -343,7 +343,7 @@ h3 {
 }
 
 
-#attack, #reset, .team-block, .pokemon-block {
+#attack, #reset, .team-block, #meowth, #pikachu, #snorlax, #dratini {
 	display: none;
 }
 

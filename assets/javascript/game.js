@@ -85,14 +85,7 @@ function startGame() {
 		genderRatio: "50% male, 50% female",
 		catchRate: "33.3%",
 		pokedexNumber: "#052",
-		EVYield: {
-			hp: 0,
-			atk: 0,
-			def: 0,
-			sAtk: 0,
-			sDef: 0,
-			speed: 1
-		},
+		EVYield: ['hp: 0', 'atk: 0', 'def: 0', 'sAtk: 0', 'sDef: 0', 'speed: 1'],
 		height: "0.4 meters",
 		weight: "9.3 lbs.",
 		pokedexEntry: "Meowth, the Scratch Cat Pokémon. Meowth loves to roam at night to gather coins and other objects that sparkle, but it spend most of the daylight hours sleeping."
@@ -109,14 +102,7 @@ function startGame() {
 		genderRatio: "50% male, 50% female",
 		catchRate: "24.8%",
 		pokedexNumber: "#025",
-		EVYield: {
-			hp: 0,
-			atk: 0,
-			def: 0,
-			sAtk: 0,
-			sDef: 0,
-			speed: 2
-		},
+		EVYield: ['hp: 0', 'atk: 0', 'def: 0', 'sAtk: 0', 'sDef: 0', 'speed: 2'],
 		height: "0.4 meters",
 		weight: "13.2 lbs.",
 		pokedexEntry: "Pikachu, the Mouse Pokémon. It can generate electric attacks from the electric pouches located in both of its cheeks."
@@ -133,14 +119,7 @@ function startGame() {
 		genderRatio: "87.5% male, 12.5% female",
 		catchRate: "3.3%",
 		pokedexNumber: "#143",
-		EVYield: {
-			hp: 2,
-			atk: 0,
-			def: 0,
-			sAtk: 0,
-			sDef: 0,
-			speed: 0
-		},
+		EVYield: ['hp: 2', 'atk: 0', 'def: 0', 'sAtk: 0', 'sDef: 0', 'speed: 0'],
 		height: "2.1 meters",
 		weight: "1014.1 lbs.",
 		pokedexEntry: "Snorlax, the Sleeping Pokémon. Snorlax isn't satisfied unless it eats at least 900 pounds of food per day. Once it is full, it promptly goes to sleep."
@@ -157,14 +136,7 @@ function startGame() {
 		genderRatio: "50% male, 50% female",
 		catchRate: "5.9%",
 		pokedexNumber: "#147",
-		EVYield: {
-			hp: 0,
-			atk: 1,
-			def: 0,
-			sAtk: 0,
-			sDef: 0,
-			speed: 0
-		},
+		EVYield: ['hp: 0', 'atk: 1', 'def: 0', 'sAtk: 0', 'sDef: 0', 'speed: 0'],
 		height: "1.8 meters",
 		weight: "7.3 lbs.",
 		pokedexEntry: "Dratini, the Dragon Pokémon. Dratini sheds its skin as it grows, often doing so while hidden behind large powerful waterfalls."
@@ -241,6 +213,7 @@ function playerSettingClick() {
 				boxText.append(teams[j].message);
 				boxText.appendTo(boxBlock);
 			}
+			//This displays the description of each team when Hovered
 			$('.team').hover(
 				function() {
 					$(this).parent().find('.team-block').show();
@@ -287,7 +260,6 @@ function teamSettingClick() {
 			//This empties out the left over team
 			$('#teamBoard').empty();
 		}
-		
 		//This sets up the pokemon screen
 		var chooseTextPokemon = $('<h2>');
 		var pokemon = $('<div>');
@@ -316,27 +288,102 @@ function teamSettingClick() {
 			img1.attr('src', pokemons[k].pokeball);
 			img1.attr('alt', pokemons[k].name);
 			img1.appendTo(box);
+			//This sets up the container for each pokemon
+			var pokemonName = $('<div>');
+			pokemonName.attr('id', pokemons[k].name.toLowerCase());
+			pokemonName.appendTo('#description');
+			//This sets up the stats portion of the description screen
+			var pokemonStats = $('<div>');
+			var img2 = $('<img>');
+			var box2 = $('<div>');
+			var h4Stats = $('<h4>');
+			var pStats = $('<p>');
+			pokemonStats.attr('id', "stats" + k);
+			pokemonStats.addClass('box col-4 float-left pokemon-block');
+			pokemonStats.appendTo(pokemonName);
+			img2.attr('src', 'assets/images/fist.svg');
+			img2.attr('alt', 'Stats');
+			img2.attr('width', '50%');
+			img2.addClass('box-img-top mx-auto');
+			img2.appendTo(pokemonStats);
+			box2.addClass('box-block');
+			box2.appendTo(pokemonStats);
+			h4Stats.addClass('box-title');
+			h4Stats.text('STATS');
+			h4Stats.appendTo(box2);
+			pStats.addClass('box-text');
+			pStats.text(pokemons[k].pokedexEntry);
+			pStats.appendTo(box2);
+			//This sets up the properties portion of the description screen
+			var pokemonProperties = $('<div>');
+			var img3 = $('<img>');
+			var box3 = $('<div>');
+			var h4Properties = $('<h4>');
+			var pProperties = $('<p>');
+			pokemonProperties.attr('id', "properties" + k);
+			pokemonProperties.addClass('box col-4 float-left pokemon-block');
+			pokemonProperties.appendTo(pokemonName);
+			img3.attr('src', 'assets/images/scene.svg');
+			img3.attr('alt', 'properties');
+			img3.attr('width', '50%');
+			img3.addClass('box-img-top mx-auto');
+			img3.appendTo(pokemonProperties);
+			box3.addClass('box-block');
+			box3.appendTo(pokemonProperties);
+			h4Properties.addClass('box-title');
+			h4Properties.text('PROPERTIES');
+			h4Properties.appendTo(box3);
+			pProperties.addClass('box-text');
+			pProperties.text(pokemons[k].pokedexNumber);
+			pProperties.appendTo(box3);
+			//This sets up the pokedex portion of the description screen
+			var pokemonPokedex = $('<div>');
+			var img4 = $('<img>');
+			var box4 = $('<div>');
+			var h4Pokedex = $('<h4>');
+			var pPokedex = $('<p>');
+			pokemonPokedex.attr('id', "pokedex" + k);
+			pokemonPokedex.addClass('box col-4 float-left pokemon-block');
+			pokemonPokedex.appendTo(pokemonName);
+			img4.attr('src', 'assets/images/heart.svg');
+			img4.attr('alt', 'pokedex');
+			img4.attr('width', '50%');
+			img4.addClass('box-img-top mx-auto');
+			img4.appendTo(pokemonPokedex);
+			box4.addClass('box-block');
+			box4.appendTo(pokemonPokedex);
+			h4Pokedex.addClass('box-title');
+			h4Pokedex.text('POKEDEX');
+			h4Pokedex.appendTo(box4);
+			pPokedex.addClass('box-text');
+			for(f=0; f<pokemons[k].EVYield.length; f++) {
+				pPokedex.append(pokemons[k].EVYield[f] + '<br>');
+			}
+			pPokedex.appendTo(box4);
 		}
-		//This goes inside the start game function because if it didn't it would not apply the hover event when the game is reset.
+		//This displays the pokemon when you hover over the pokeball
+		//This also displays the pokemon description when you hover over the pokeball
 		$('.pokemons').hover(
 			function() {
 				$(this).find('.img-fluid').attr('src', pokemons[$(this).attr('id')].img);
-				$('.pokemon-block').show();
+				//This shows the correct description by picking up the id of the pokemon and using that as the target for the correct description element
+				$($('#description').children()[$(this).attr('id')]).show();
 			}, function() {
 				$(this).find('.img-fluid').attr('src', pokemons[$(this).attr('id')].pokeball);
-				$('.pokemon-block').hide();
+				$($('#description').children()[$(this).attr('id')]).hide();
 			}
 		);	
 	});
 }
-
 teamSettingClick();
 //PokemonSettingClick
 function pokemonSettingClick() {
 	$(document).on('click', '.pokemons', function() {
-	$(this).unbind("mouseleave");	
-	$(this).unbind("mouseenter");		
-	//Will only run if I haven't picked a Pokemon
+		//This hides back the description of the pokemon when clicked
+		$($('#description').children()[$(this).attr('id')]).hide();
+		$(this).unbind("mouseleave");	
+		$(this).unbind("mouseenter");	
+		//Will only run if I haven't picked a Pokemon
 		if(!pickedPokemon) {
 			var chooseTextOpponent = $('<h2>');
 			var enemies = $('<div>');
@@ -375,7 +422,7 @@ function pokemonSettingClick() {
 			$('#hpTextOpponent').text("HP: " + pokemons[myOpponent].hp);
 			$(this).siblings().addClass('benchedEnemies');
 			$(this).siblings().addBack().removeClass('pokemons');
-			$(this).siblings().appendTo($('#benched'));
+			$(this).siblings().appendTo($('#benched'));		
 		}
 	})
 }
