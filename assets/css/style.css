@@ -364,5 +364,7 @@ h3 {
   clear:both;
 }
 
-
+.mt-1 {
+  margin-top: 2.25rem !important;
+}
 

@@ -72,6 +72,19 @@ function startGame() {
 		sigil: "assets/images/instinct.svg",
 		pokemon: "assets/images/zapdos.svg"
 	}];
+	items = [ {
+		name: "backpack",
+		img: "assets/images/backpack.svg"
+	}, {
+		name: "pokeballs",
+		img: "assets/images/pokeballs.svg"
+	}, {
+		name: "moneyBag",
+		img: "assets/images/money-bag.svg"
+	}, {
+		name: "pokeBag",
+		img: "assets/images/pokebag.svg"
+	}];
 	pokemons = [ {
 		id: 0,
 		name: "Meowth",
@@ -177,7 +190,7 @@ function playerSettingClick() {
 			chooseTextPlayer.remove();
 			//This checks whether you picked a female. If you did then it will insert it before the male characther
 			if($(this).parent('#female').length){
-				$(this).insertBefore('#male');
+				$(this).parent().insertBefore('#male');
 			}
 			//This hides the players while the user is choosing a team 
 			$('#playerBoard').hide();
@@ -283,10 +296,11 @@ function teamSettingClick() {
 			pokemonChoices.appendTo('#pokemons');
 			box.addClass('box');
 			box.appendTo(pokemonChoices);
-			img1.addClass('img-fluid');
+			img1.addClass('mx-auto img-fluid');
 			//can you put more attributes in one line?
 			img1.attr('src', pokemons[k].pokeball);
 			img1.attr('alt', pokemons[k].name);
+			img1.attr('width', '70%');
 			img1.appendTo(box);
 			//This sets up the container for each pokemon
 			var pokemonName = $('<div>');
@@ -406,6 +420,19 @@ function pokemonSettingClick() {
 			//I then targeted the heading, chooseTextPokemon, and replaced by the name of the pokemon I chose
 			$('#chooseTextPokemon').text(pokemons[myPokemon].name);
 			$('#hpTextPokemon').text("HP: " + pokemons[myPokemon].hp);
+			//This adds the items to our navbar on the left
+			for (g=0; g<items.length; g++) {
+				var item = $('<div>');
+				var itemImage = $('<img>');
+				item.attr('id', items[g].name);
+				item.addClass('box mt-1');
+				item.appendTo(navLeft);
+				itemImage.attr('src', items[g].img);
+				itemImage.attr('alt', items[g].name);
+				itemImage.attr('width', '100%');
+				itemImage.addClass('box-img-top d-block mx-auto');
+				itemImage.appendTo(item);
+			}
 		//Will only run if I have picked a Pokemon and if I haven't picked an Opponent
 		} else if(pickedPokemon && !pickedOpponent) {
 			var benchedText = $('<h2>');
