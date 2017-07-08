@@ -25,7 +25,8 @@ function startGame() {
 	$('#playerBoard').empty();
 	$('#pokemonBoard').empty();
 	$('#enemyBoard').empty();
-	$('#benchedBoard').empty();
+	$('#navRight').empty();
+	$('#description').empty();
 	players = [ {
 		gender: "male",
 		img: "assets/images/player.svg"
@@ -294,7 +295,7 @@ function teamSettingClick() {
 			var pokemonStats = $('<div>');
 			var img2 = $('<img>');
 			var box2 = $('<div>');
-			var h4Stats = $('<h4>');
+			var h3Stats = $('<h3>');
 			var pStats = $('<p>');
 			pokemonStats.attr('id', "stats" + k);
 			pokemonStats.addClass('box col-4 float-left pokemon-block');
@@ -306,17 +307,17 @@ function teamSettingClick() {
 			img2.appendTo(pokemonStats);
 			box2.addClass('box-block');
 			box2.appendTo(pokemonStats);
-			h4Stats.addClass('box-title');
-			h4Stats.text('STATS');
-			h4Stats.appendTo(box2);
+			h3Stats.addClass('box-title');
+			h3Stats.text('STATS');
+			h3Stats.appendTo(box2);
 			pStats.addClass('box-text');
-			pStats.text(pokemons[k].pokedexEntry);
+			pStats.append('HP: ' + pokemons[k].hp + '<br>' + 'Attack: ' + pokemons[k].attack + '<br>' + 'Computer Attack: ' + pokemons[k].computerAttack);
 			pStats.appendTo(box2);
 			//This sets up the properties portion of the description screen
 			var pokemonProperties = $('<div>');
 			var img3 = $('<img>');
 			var box3 = $('<div>');
-			var h4Properties = $('<h4>');
+			var h3Properties = $('<h3>');
 			var pProperties = $('<p>');
 			pokemonProperties.attr('id', "properties" + k);
 			pokemonProperties.addClass('box col-4 float-left pokemon-block');
@@ -328,17 +329,17 @@ function teamSettingClick() {
 			img3.appendTo(pokemonProperties);
 			box3.addClass('box-block');
 			box3.appendTo(pokemonProperties);
-			h4Properties.addClass('box-title');
-			h4Properties.text('PROPERTIES');
-			h4Properties.appendTo(box3);
+			h3Properties.addClass('box-title');
+			h3Properties.text('PROPERTIES');
+			h3Properties.appendTo(box3);
 			pProperties.addClass('box-text');
-			pProperties.text(pokemons[k].pokedexNumber);
+			pProperties.text(pokemons[k].pokedexEntry);
 			pProperties.appendTo(box3);
 			//This sets up the pokedex portion of the description screen
 			var pokemonPokedex = $('<div>');
 			var img4 = $('<img>');
 			var box4 = $('<div>');
-			var h4Pokedex = $('<h4>');
+			var h3Pokedex = $('<h3>');
 			var pPokedex = $('<p>');
 			pokemonPokedex.attr('id', "pokedex" + k);
 			pokemonPokedex.addClass('box col-4 float-left pokemon-block');
@@ -350,13 +351,11 @@ function teamSettingClick() {
 			img4.appendTo(pokemonPokedex);
 			box4.addClass('box-block');
 			box4.appendTo(pokemonPokedex);
-			h4Pokedex.addClass('box-title');
-			h4Pokedex.text('POKEDEX');
-			h4Pokedex.appendTo(box4);
+			h3Pokedex.addClass('box-title');
+			h3Pokedex.text('POKEDEX');
+			h3Pokedex.appendTo(box4);
 			pPokedex.addClass('box-text');
-			for(f=0; f<pokemons[k].EVYield.length; f++) {
-				pPokedex.append(pokemons[k].EVYield[f] + '<br>');
-			}
+			pPokedex.append("Pokedex Number: " + pokemons[k].pokedexNumber + '<br>' + "Type: " + pokemons[k].type + '<br>' + "Ability: " + pokemons[k].abilities + '<br>' + "Gender Ratio: " + pokemons[k].genderRatio + '<br>' + "Catch Rate: " + pokemons[k].catchRate);
 			pPokedex.appendTo(box4);
 		}
 		//This displays the pokemon when you hover over the pokeball
@@ -377,8 +376,6 @@ teamSettingClick();
 //PokemonSettingClick
 function pokemonSettingClick() {
 	$(document).on('click', '.pokemons', function() {
-		// $(this).parent().addClass('text-center');
-		console.log($(this).parent());
 		//This hides back the description of the pokemon when clicked
 		$($('#description').children()[$(this).attr('id')]).hide();
 		$(this).unbind("mouseleave");	
@@ -421,21 +418,23 @@ function pokemonSettingClick() {
 			}
 		//Will only run if I have picked a Pokemon and if I haven't picked an Opponent
 		} else if(pickedPokemon && !pickedOpponent) {
-			var benchedText = $('<h2>');
-			var benched = $('<div>');
-			benchedText.addClass('text-center');
-			benchedText.text("BENCHED");
-			benchedText.appendTo('#benchedBoard');
-			benched.attr('id', 'benched');
-			benched.addClass('row');
-			benched.appendTo('#benchedBoard');
+			// var benchedText = $('<h2>');
+			// var benched = $('<div>');
+			// benchedText.addClass('text-center');
+			// benchedText.text("BENCHED");
+			// benchedText.appendTo('#navRight');
+			// benched.attr('id', 'benched');
+			// benched.addClass('row');
+			// benched.appendTo('#navRight');
 			$('#attack').show();
 			myOpponent = $(this).attr('id');
 			$('#chooseTextOpponent').text(pokemons[myOpponent].name);
 			$('#hpTextOpponent').text("HP: " + pokemons[myOpponent].hp);
-			$(this).siblings().addClass('benchedEnemies');
+			$(this).siblings().addClass('benchedEnemies box mt-1');
 			$(this).siblings().addBack().removeClass('pokemons');
-			$(this).siblings().appendTo($('#benched'));
+			$(this).siblings().removeClass('col-3')
+			$(this).siblings().find('img').attr('width', '100%');
+			$(this).siblings().appendTo($('#navRight'));
 			$('#description').addClass('collapse');
 		}
 	})
@@ -466,22 +465,29 @@ function combatAttackClick() {
 				myOpponent = $('.benchedEnemies').attr('id');
 				//This makes it so the last enemy shows up as a pokemon and not a pokeball
 				$('.benchedEnemies').find('.img-fluid').attr('src', pokemons[myOpponent].img);
+				$('.benchedEnemies').addClass('col-3');
+				$('.benchedEnemies').removeClass('box mt-1');
+				$('.benchedEnemies').find('img').attr('width', '70%');
 				$('.pokemons').unbind("mouseleave");
 				$('#hpTextOpponent').text("HP: " + pokemons[myOpponent].hp);
 				$('#chooseTextOpponent').text(pokemons[myOpponent].name);
 				$('.pokemons').removeClass('benchedEnemies');
+
+				console.log('hello');
 				//This makes it so the click doesn't work for the last enemy
 				pickedOpponent = true;
 			}
 			else if($('.pokemons').length !== 0) {
 				$('#chooseTextOpponent').text("Choose Another Opponent");
+				$('.benchedEnemies').addClass('col-3');
+				$('.benchedEnemies').removeClass('box mt-1')
+				$('.benchedEnemies').find('img').attr('width', '70%');
 				$('.pokemons').removeClass('benchedEnemies');
 				$('#attack').hide();
 				$('#description').removeClass('collapse');
 			}
 			$('.pokemons').appendTo($('#enemies'));
 			//This makes sure that the benched board is constantly being emptied to make sure that there is nothing there when an opponent dies.
-			$('#benchedBoard').empty();
 		} else {
 			//Opponent attacking Pokemon
 			pokemons[myPokemon].hp = pokemons[myPokemon].hp - pokemons[myOpponent].computerAttack;
