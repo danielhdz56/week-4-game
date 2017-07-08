@@ -1,29 +1,17 @@
 /* Gradient Background */
-#canvas-radial {
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
+html {
+  background: #43c6ac; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #43c6ac, #191654); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #43c6ac, #191654); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 html {
-	font-family: sans-serif;
+	font-family: 'Exo 2', sans-serif;
 	line-height: 1.15;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	margin: 0 auto;
-  /*background: url(../images/pokeball.svg) no-repeat center center fixed; */
-  /*-webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;*/
-  background: black;
   color: whitesmoke;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -34,15 +22,9 @@ h1, h2, h3, h4, h5, h6 {
   color: inherit;
 }
 h1 {
-  font-size: 1.5rem;
   margin: 0.67em 0;
 }
-h2 {
-	font-size: 1rem;
-}
-h3 {
-	font-size: 0.5rem;
-}
+
 .img-fluid {
   max-width: 100%;
   height: auto;
@@ -172,17 +154,25 @@ h3 {
 .offset-3 {
   margin-left: 25%;
 }
-@media (min-width: 576px) {
+
+h2 {
+  font-size: 1.75rem;
+}
+p {
+  font-size: 1.15rem;
+}
+/*@media (min-width: 576px) {
   h1 {
     font-size: 2.5rem;
     margin: 0.67em 0;
   }
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
   h3 {
     font-size: 1rem;
-  }
+  }*/
+
   .col-sm {
     -webkit-flex-basis: 0;
         -ms-flex-preferred-size: 0;
@@ -331,8 +321,12 @@ h3 {
 }
 
 
-#attack, #reset, .team-block, #meowth, #pikachu, #snorlax, #dratini {
+#attack, #reset, #meowth, #pikachu, #snorlax, #dratini {
 	display: none;
+}
+
+.team-block {
+  visibility: hidden;
 }
 
 .d-block {
@@ -358,27 +352,16 @@ h3 {
 #navLeft, #navRight {
   background: rgba(255, 255, 255, 0.65);
 }
-html, body, #container, .row {
+#navLeft, #navRight, #navbars-and-content, #mainRow, #container, body, html{
   height: 100%;
 }
-
-
-
-.progress {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  overflow: hidden;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  text-align: center;
-  background-color: #eceeef;
-  border-radius: 0.25rem;
+#attack, #reset, #benchedBoard {
+  position: relative;
+  bottom: 100px;
+}
+.collapse {
+  display: none;
 }
 
-.progress-bar {
-  height: 1rem;
-  color: #fff;
-  background-color: #0275d8;
-}
+
+

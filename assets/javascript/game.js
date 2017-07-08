@@ -1,19 +1,3 @@
-//Gradient Background
-var graminInstance = new Granim( {
-	element: '#canvas-radial',
-	name: 'radial-gradient', 
-	direction: 'radial',
-	opacity: [1, 1],
-	isPausedWhenNotInView: true,
-	states: {
-		"default-state": {
-			gradients: [
-				['#000046', '#1CB5E0'],
-				['#1CB5E0', '#000046'],
-			]
-		}
-	}
-});
 //Theme Song
 myAudio = new Audio('assets/audio/101-opening.mp3'); 
 myAudio.addEventListener('ended', function() {
@@ -176,7 +160,7 @@ function startGame() {
 		img.addClass('player d-block mx-auto');
 		img.attr('src', players[i].img);
 		img.attr('alt', players[i].gender);
-		img.attr('width', '50%');
+		img.attr('width', '40%');
 		img.appendTo(playerChoices);
 	}
 }
@@ -229,9 +213,9 @@ function playerSettingClick() {
 			//This displays the description of each team when Hovered
 			$('.team').hover(
 				function() {
-					$(this).parent().find('.team-block').show();
+					$(this).parent().find('.team-block').css('visibility', 'visible');
 				}, function() {
-					$(this).parent().find('.team-block').hide();
+					$(this).parent().find('.team-block').css('visibility', 'hidden');
 				}
 			);	
 		}
@@ -393,6 +377,8 @@ teamSettingClick();
 //PokemonSettingClick
 function pokemonSettingClick() {
 	$(document).on('click', '.pokemons', function() {
+		// $(this).parent().addClass('text-center');
+		console.log($(this).parent());
 		//This hides back the description of the pokemon when clicked
 		$($('#description').children()[$(this).attr('id')]).hide();
 		$(this).unbind("mouseleave");	
@@ -449,7 +435,8 @@ function pokemonSettingClick() {
 			$('#hpTextOpponent').text("HP: " + pokemons[myOpponent].hp);
 			$(this).siblings().addClass('benchedEnemies');
 			$(this).siblings().addBack().removeClass('pokemons');
-			$(this).siblings().appendTo($('#benched'));		
+			$(this).siblings().appendTo($('#benched'));
+			$('#description').addClass('collapse');
 		}
 	})
 }
@@ -463,6 +450,7 @@ function combatAttackClick() {
 		attackMultiplier++;
 		//This will only occur if a pokemon has less than 0 health
 		if(pokemons[myOpponent].hp <= 0) {
+			//This will only occur if there are no pokemon left
 			if($('.pokemons').length === 1) {
 				$('#attack').hide();
 				$('#chooseTextOpponent').hide();
@@ -489,6 +477,7 @@ function combatAttackClick() {
 				$('#chooseTextOpponent').text("Choose Another Opponent");
 				$('.pokemons').removeClass('benchedEnemies');
 				$('#attack').hide();
+				$('#description').removeClass('collapse');
 			}
 			$('.pokemons').appendTo($('#enemies'));
 			//This makes sure that the benched board is constantly being emptied to make sure that there is nothing there when an opponent dies.
