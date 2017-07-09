@@ -324,9 +324,10 @@ p {
 }
 
 
-#attack, #reset, #meowth, #pikachu, #snorlax, #dratini {
+#attack, #reset {
 	display: none;
 }
+
 
 .team-block {
   visibility: hidden;

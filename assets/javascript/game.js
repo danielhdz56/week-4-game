@@ -27,6 +27,7 @@ function startGame() {
 	$('#enemyBoard').empty();
 	$('#navRight').empty();
 	$('#description').empty();
+	$('#description').removeClass('collapse');
 	players = [ {
 		gender: "male",
 		img: "assets/images/player.svg"
@@ -282,14 +283,14 @@ function teamSettingClick() {
 			box.addClass('box');
 			box.appendTo(pokemonChoices);
 			img1.addClass('mx-auto img-fluid');
-			//can you put more attributes in one line?
 			img1.attr('src', pokemons[k].pokeball);
 			img1.attr('alt', pokemons[k].name);
 			img1.attr('width', '70%');
 			img1.appendTo(box);
-			//This sets up the container for each pokemon
+			//This sets up the description box that is displayed on hover
 			var pokemonName = $('<div>');
 			pokemonName.attr('id', pokemons[k].name.toLowerCase());
+			pokemonName.addClass('collapse')
 			pokemonName.appendTo('#description');
 			//This sets up the stats portion of the description screen
 			var pokemonStats = $('<div>');
@@ -364,10 +365,10 @@ function teamSettingClick() {
 			function() {
 				$(this).find('.img-fluid').attr('src', pokemons[$(this).attr('id')].img);
 				//This shows the correct description by picking up the id of the pokemon and using that as the target for the correct description element
-				$($('#description').children()[$(this).attr('id')]).show();
+				$($('#description').children()[$(this).attr('id')]).removeClass('collapse');
 			}, function() {
 				$(this).find('.img-fluid').attr('src', pokemons[$(this).attr('id')].pokeball);
-				$($('#description').children()[$(this).attr('id')]).hide();
+				$($('#description').children()[$(this).attr('id')]).addClass('collapse')
 			}
 		);	
 	});
@@ -377,7 +378,7 @@ teamSettingClick();
 function pokemonSettingClick() {
 	$(document).on('click', '.pokemons', function() {
 		//This hides back the description of the pokemon when clicked
-		$($('#description').children()[$(this).attr('id')]).hide();
+		$($('#description').children()[$(this).attr('id')]).addClass('collapse');
 		$(this).unbind("mouseleave");	
 		$(this).unbind("mouseenter");	
 		//Will only run if I haven't picked a Pokemon
@@ -418,14 +419,6 @@ function pokemonSettingClick() {
 			}
 		//Will only run if I have picked a Pokemon and if I haven't picked an Opponent
 		} else if(pickedPokemon && !pickedOpponent) {
-			// var benchedText = $('<h2>');
-			// var benched = $('<div>');
-			// benchedText.addClass('text-center');
-			// benchedText.text("BENCHED");
-			// benchedText.appendTo('#navRight');
-			// benched.attr('id', 'benched');
-			// benched.addClass('row');
-			// benched.appendTo('#navRight');
 			$('#attack').show();
 			myOpponent = $(this).attr('id');
 			$('#chooseTextOpponent').text(pokemons[myOpponent].name);
