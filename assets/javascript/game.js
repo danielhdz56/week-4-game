@@ -104,7 +104,8 @@ function startGame() {
 		EVYield: ['hp: 0', 'atk: 0', 'def: 0', 'sAtk: 0', 'sDef: 0', 'speed: 2'],
 		height: "0.4 meters",
 		weight: "13.2 lbs.",
-		pokedexEntry: "Pikachu, the Mouse Pokémon. It can generate electric attacks from the electric pouches located in both of its cheeks."
+		pokedexEntry: "Pikachu, the Mouse Pokémon. It can generate electric attacks from the electric pouches located in both of its cheeks.",
+		attackimg: "assets/images/flash.svg"
 	}, {
 		id: 2,
 		name: "Snorlax",
@@ -465,8 +466,6 @@ function combatAttackClick() {
 				$('#hpTextOpponent').text("HP: " + pokemons[myOpponent].hp);
 				$('#chooseTextOpponent').text(pokemons[myOpponent].name);
 				$('.pokemons').removeClass('benchedEnemies');
-
-				console.log('hello');
 				//This makes it so the click doesn't work for the last enemy
 				pickedOpponent = true;
 			}
