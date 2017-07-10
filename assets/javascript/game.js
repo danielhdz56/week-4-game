@@ -1,5 +1,6 @@
 //Theme Song
-myAudio = new Audio('assets/audio/101-opening.mp3'); 
+myAudio = new Audio('assets/audio/101-opening.mp3');
+//Vanilla JS that makes sure this loops when the song ends 
 myAudio.addEventListener('ended', function() {
     this.currentTime = 0;
     this.play();
@@ -16,18 +17,22 @@ var pickedOpponent;
 var attackMultiplier;
 var players;
 var pokemons;
-//Creating the pokemons
+//How the game will start even on restart
 function startGame() {
+	//This makes sure that everything that was dynamically added has been removed. 
+	//Due to the amount of styling that is done this is necessary 
 	$('#navLeft').remove();
 	$('#navRight').remove();
+	//Makes sure that al navbar content is moved back outside of smaller columns
 	$('#navbars-and-content').prepend($('#content').children());
 	$('#content').remove();
+	//We don't want 
 	$('#playerBoard').empty();
 	$('#pokemonBoard').empty();
 	$('#enemyBoard').empty();
-	$('#navRight').empty();
 	$('#description').empty();
 	$('#description').removeClass('collapse');
+	//This is the start of the objects that I created. Please note that not all properties were used.
 	players = [ {
 		gender: "male",
 		img: "assets/images/player.svg"
@@ -81,7 +86,7 @@ function startGame() {
 		pokeball: "assets/images/pokeball.svg",
 		type: "Normal",
 		abilities: "Unnerve",
-		genderRatio: "50% male, 50% female",
+		genderRatio: "50% male",
 		catchRate: "33.3%",
 		pokedexNumber: "#052",
 		EVYield: ['hp: 0', 'atk: 0', 'def: 0', 'sAtk: 0', 'sDef: 0', 'speed: 1'],
@@ -98,7 +103,7 @@ function startGame() {
 		pokeball: "assets/images/superball.svg",
 		type: "Electric",
 		abilities: "Static",
-		genderRatio: "50% male, 50% female",
+		genderRatio: "50% male",
 		catchRate: "24.8%",
 		pokedexNumber: "#025",
 		EVYield: ['hp: 0', 'atk: 0', 'def: 0', 'sAtk: 0', 'sDef: 0', 'speed: 2'],
@@ -133,7 +138,7 @@ function startGame() {
 		pokeball: "assets/images/mega-ball.svg",
 		type: "Dragon",
 		abilities: "Shed Skin",
-		genderRatio: "50% male, 50% female",
+		genderRatio: "50% Male",
 		catchRate: "5.9%",
 		pokedexNumber: "#147",
 		EVYield: ['hp: 0', 'atk: 1', 'def: 0', 'sAtk: 0', 'sDef: 0', 'speed: 0'],
@@ -304,7 +309,7 @@ function teamSettingClick() {
 			pokemonStats.appendTo(pokemonName);
 			img2.attr('src', 'assets/images/fist.svg');
 			img2.attr('alt', 'Stats');
-			img2.attr('width', '50%');
+			img2.attr('width', '40%');
 			img2.addClass('box-img-top mx-auto');
 			img2.appendTo(pokemonStats);
 			box2.addClass('box-block');
@@ -326,7 +331,7 @@ function teamSettingClick() {
 			pokemonProperties.appendTo(pokemonName);
 			img3.attr('src', 'assets/images/scene.svg');
 			img3.attr('alt', 'properties');
-			img3.attr('width', '50%');
+			img3.attr('width', '40%');
 			img3.addClass('box-img-top mx-auto');
 			img3.appendTo(pokemonProperties);
 			box3.addClass('box-block');
@@ -348,7 +353,7 @@ function teamSettingClick() {
 			pokemonPokedex.appendTo(pokemonName);
 			img4.attr('src', 'assets/images/heart.svg');
 			img4.attr('alt', 'pokedex');
-			img4.attr('width', '50%');
+			img4.attr('width', '40%');
 			img4.addClass('box-img-top mx-auto');
 			img4.appendTo(pokemonPokedex);
 			box4.addClass('box-block');
@@ -503,4 +508,3 @@ function resetGame() {
 	});
 }
 resetGame();
-
